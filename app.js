@@ -1,4 +1,6 @@
 const canvas = document.querySelector("#jsCanvas");
+//const colors = document.querySelector("#jsColors");
+const colors = document.querySelectorAll(".controls__color");
 const ctx = canvas.getContext("2d");
 
 canvas.width = 700;
@@ -30,9 +32,32 @@ function onMouseMove(event) {
   }
 }
 
+//** my solution with eventDelegation using dataset
+// function onClickColorChangeBtn(event) {
+//   const dataset = event.target.dataset;
+//   const key = dataset.key;
+//   //const value = dataset.value;
+//   const value = event.target.style.backgroundColor;
+//   if (key == null) {
+//     return;
+//   } else {
+//     ctx.strokeStyle = value;
+//   }
+// }
+
+function onClickColorChangeBtn(event) {
+  const color = event.target.style.backgroundColor;
+  ctx.strokeStyle = color;
+}
+
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
   canvas.addEventListener("mouseup", stopPainting);
   canvas.addEventListener("mouseleave", stopPainting);
 }
+
+//Nico's solution
+colors.forEach((color) =>
+  color.addEventListener("click", onClickColorChangeBtn)
+);
