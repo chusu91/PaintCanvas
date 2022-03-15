@@ -2,6 +2,7 @@ const canvas = document.querySelector("#jsCanvas");
 //const colors = document.querySelector("#jsColors");
 const colors = document.querySelectorAll(".controls__color");
 const ctx = canvas.getContext("2d");
+const brushControl = document.querySelector("#jsRange");
 
 canvas.width = 700;
 canvas.height = 700;
@@ -49,6 +50,13 @@ function onClickColorChangeBtn(event) {
   const color = event.target.style.backgroundColor;
   ctx.strokeStyle = color;
 }
+
+function onChangeBrushSize() {
+  const brushSize = this.value;
+  ctx.lineWidth = brushSize;
+}
+
+brushControl.addEventListener("input", onChangeBrushSize);
 
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
